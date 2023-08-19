@@ -1,0 +1,32 @@
+.createTaskContainer {
+  display: flex;
+  gap: 0.5rem;
+  width: 50%;
+  min-width: 200px;
+  position: absolute;
+  top: 175px;
+  left: 25%;
+}
+
+.createTaskBtn {
+  background: var(--blue-dark);
+  color: var(--gray-100);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  font-weight: 700;
+  font-size: 0.875rem;
+
+  padding: 1rem;
+
+  transition: 0.2s;
+}
+
+.createTaskBtn:hover {
+  background: var(--blue-light);
+}
