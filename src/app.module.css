@@ -1,3 +1,18 @@
+main {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5rem auto;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
 .createTaskContainer {
   display: flex;
   gap: 0.5rem;
@@ -29,4 +44,54 @@
 
 .createTaskBtn:hover {
   background: var(--blue-light);
+}
+
+.taskInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskInfo p {
+  color: var(--blue-light);
+  font-size: 0.875rem;
+  font-weight: 700;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.taskInfo p > span {
+  color: var(--gray-200);
+  background: var(--gray-400);
+  padding: 0.125rem 0.7rem;
+  border-radius: 999px;
+}
+
+.tasksContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.noTasks {
+  width: 100%;
+  border-top: 1px solid #333333;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+  align-self: stretch;
+}
+
+.noTasks p {
+  line-height: 1.4rem;
+  font-weight: 700;
+}
+
+.noTasks p > span {
+  font-weight: 400;
 }
