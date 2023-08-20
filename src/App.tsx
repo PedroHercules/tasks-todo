@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Header } from "./components/Header"
 import { Input } from "./components/Input"
 import { PlusCircle } from '@phosphor-icons/react'
@@ -31,17 +30,17 @@ function App() {
   useEffect(() => {
     setAllTasks(tasks)
     countTasksCompletedOnPageLoad()
-  }, [])
+  }, [allTasks])
 
   function countTasksCompletedOnPageLoad() {
-    const completedTasks = allTasks.filter((item) => item.isChecked)
+    const completedTasks = tasks.filter((item) => item.isChecked)
     setCountCompleted(completedTasks.length)
   }
 
   async function handleAddTask() {
     console.log("chamou")
     const task = addTask(taskValue)
-    setAllTasks([...allTasks, task])
+    setAllTasks((prevTasks) => [...prevTasks, task])
   }
   
   return (
@@ -85,8 +84,8 @@ function App() {
 
           <div className={styles.tasksContainer}>
             {
-              tasks.length ? (
-                tasks.map((task) => (
+              allTasks.length ? (
+                allTasks.map((task) => (
                   <TaskCard 
                     value={task.value}
                     isChecked={task.isChecked}
