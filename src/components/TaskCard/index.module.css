@@ -41,3 +41,22 @@
 }
 
 
+.removeBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-300);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+}
+
+.removeBtn:hover {
+  background: var(--gray-400);
+  color: var(--danger);
+}
+
+

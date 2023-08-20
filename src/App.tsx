@@ -9,7 +9,7 @@ import styles from './app.module.css'
 import "./global.css"
 import { TaskCard } from "./components/TaskCard"
 import { useEffect, useState } from "react"
-import { tasks, addTask, TaskProps } from "./data/task"
+import { tasks, addTask, TaskProps, fetchTasks, removeTask } from "./data/task"
 
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
   }
 
   useEffect(() => {
-    setAllTasks(tasks)
+    loadTasks()
     countTasksCompletedOnPageLoad()
   }, [allTasks])
 
@@ -37,10 +37,20 @@ function App() {
     setCountCompleted(completedTasks.length)
   }
 
-  async function handleAddTask() {
+  function loadTasks() {
+    const tasks = fetchTasks()
+    setAllTasks(tasks)
+  }
+
+  function handleAddTask() {
     console.log("chamou")
     const task = addTask(taskValue)
     setAllTasks((prevTasks) => [...prevTasks, task])
+  }
+
+  function handleRemoveTask(taskId: string) {
+    const tasksWithoutRemovedTask = removeTask(taskId)
+    setAllTasks(tasksWithoutRemovedTask)
   }
   
   return (
@@ -66,14 +76,14 @@ function App() {
           <div className={styles.taskInfo}>
             <p>
               tarefas criadas 
-              <span>{tasks.length}</span>
+              <span>{allTasks.length}</span>
             </p>
             <p>
               Concluídas
               {
-                tasks.length ? (
+                allTasks.length ? (
                   <span>
-                    {countCompleted} de {tasks.length}
+                    {countCompleted} de {allTasks.length}
                   </span>
                 ) : (
                   <span>0</span>
@@ -93,6 +103,9 @@ function App() {
                     handleCheck={() => {
                       handleChangeCheck(task.id)
                     }} 
+                    handleRemove={() => {
+                      handleRemoveTask(task.id)
+                    }}
                   />
                 ))
               ) : (

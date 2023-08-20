@@ -9,9 +9,10 @@ interface TaskProps {
   value: string
   isChecked: CheckedState
   handleCheck: () => void
+  handleRemove: () => void
 }
 
-export function TaskCard({ value, isChecked, handleCheck }: TaskProps) {
+export function TaskCard({ value, isChecked, handleCheck, handleRemove }: TaskProps) {
   const [checked, setChecked] = useState<CheckedState | undefined>(isChecked);
 
   return (
@@ -30,7 +31,12 @@ export function TaskCard({ value, isChecked, handleCheck }: TaskProps) {
         </Checkbox.Root>
         <label htmlFor="c1">{value}</label>
       </div>
-      <Trash size={24}/>
+      <button
+        className={styles.removeBtn}
+        onClick={handleRemove}
+      >
+        <Trash size={24} className={styles.icon}/>
+      </button>
     </div>
   )
 }

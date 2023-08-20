@@ -16,3 +16,14 @@ export function addTask(description: string) {
 
   return task
 }
+
+export function removeTask(taskId: string) {
+  const taskIndex = tasks.findIndex((task) => task.id === taskId)
+  const newTasks = tasks.splice(taskIndex, 1)
+  
+  return newTasks
+}
+
+export function fetchTasks() {
+  return tasks
+}
