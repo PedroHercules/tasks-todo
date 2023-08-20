@@ -8,9 +8,10 @@ import { CheckedState } from 'node_modules/@radix-ui/react-checkbox/dist';
 interface TaskProps {
   value: string
   isChecked: CheckedState
+  handleCheck: () => void
 }
 
-export function TaskCard({ value, isChecked }: TaskProps) {
+export function TaskCard({ value, isChecked, handleCheck }: TaskProps) {
   const [checked, setChecked] = useState<CheckedState | undefined>(isChecked);
 
   return (
@@ -21,6 +22,7 @@ export function TaskCard({ value, isChecked }: TaskProps) {
           className={checked ? styles.checkboxChecked : styles.checkboxUncheked}
           checked={checked}
           onCheckedChange={setChecked}
+          onClick={handleCheck}
         >
           <Checkbox.Indicator className={styles.checkboxIndicator}>
             <Check size={12} weight='bold'/>

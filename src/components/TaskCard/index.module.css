@@ -22,6 +22,7 @@
   height: 1.5rem;
   border-radius: 100%;
   border: 1px solid var(--blue-light);
+  cursor: pointer;
 }
 
 .checkboxChecked {
@@ -32,6 +33,7 @@
   min-width: 20px;
   border-radius: 999px;
   border: 1px solid var(--purple-dark);
+  cursor: pointer;
 }
 
 .checkboxIndicator {

@@ -8,6 +8,7 @@ import styles from './app.module.css'
 
 import "./global.css"
 import { TaskCard } from "./components/TaskCard"
+import { useEffect, useState } from "react"
 
 const tasks = [
   {
@@ -28,6 +29,26 @@ const tasks = [
 ]
 
 function App() {
+  const [countCompleted, setCountCompleted] = useState(0)
+
+  function handleChangeCheck(id: string) {
+    const taskIndex = tasks.findIndex((item) => item.id === id)
+    tasks[taskIndex].isChecked = !tasks[taskIndex].isChecked
+    if (tasks[taskIndex].isChecked) {
+      setCountCompleted(countCompleted + 1)
+    } else {
+      setCountCompleted(countCompleted - 1)
+    }
+  }
+
+  useEffect(() => {
+    countTasksCompletedOnPageLoad()
+  }, [])
+
+  function countTasksCompletedOnPageLoad() {
+    const completedTasks = tasks.filter((item) => item.isChecked)
+    setCountCompleted(completedTasks.length)
+  }
   
   return (
     <>
@@ -45,11 +66,19 @@ function App() {
           <div className={styles.taskInfo}>
             <p>
               tarefas criadas 
-              <span>0</span>
+              <span>{tasks.length}</span>
             </p>
             <p>
               Concluídas
-              <span>0</span>
+              {
+                tasks.length ? (
+                  <span>
+                    {countCompleted} de {tasks.length}
+                  </span>
+                ) : (
+                  <span>0</span>
+                )
+              }
             </p>
           </div>
 
@@ -60,7 +89,10 @@ function App() {
                   <TaskCard 
                     value={task.value}
                     isChecked={task.isChecked}
-                    key={task.id} 
+                    key={task.id}
+                    handleCheck={() => {
+                      handleChangeCheck(task.id)
+                    }} 
                   />
                 ))
               ) : (
