@@ -7,6 +7,25 @@ import NoteIcon from './assets/no-tasks.svg'
 import styles from './app.module.css'
 
 import "./global.css"
+import { TaskCard } from "./components/TaskCard"
+
+const tasks = [
+  {
+    id: "task-1",
+    value: "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
+    isChecked: false
+  },
+  {
+    id: "task-2",
+    value: "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
+    isChecked: true
+  },
+  {
+    id: "task-3",
+    value: "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
+    isChecked: false
+  },
+]
 
 function App() {
   
@@ -35,17 +54,29 @@ function App() {
           </div>
 
           <div className={styles.tasksContainer}>
-
-            <div className={styles.noTasks}>
-              <img src={NoteIcon} alt="no tasks" />
-              <p>
-                Você ainda não tem tarefas cadastradas
-                <br />
-                <span>
-                Crie tarefas e organize seus itens a fazer
-                </span>
-              </p>
-            </div>
+            {
+              tasks.length ? (
+                tasks.map((task) => (
+                  <TaskCard 
+                    value={task.value}
+                    isChecked={task.isChecked}
+                    key={task.id} 
+                  />
+                ))
+              ) : (
+                <div className={styles.noTasks}>
+                  <img src={NoteIcon} alt="no tasks" />
+                  <p>
+                    Você ainda não tem tarefas cadastradas
+                    <br />
+                    <span>
+                    Crie tarefas e organize seus itens a fazer
+                    </span>
+                  </p>
+                </div>
+              )
+            }
+            
           </div>
         </div>
       </main>
