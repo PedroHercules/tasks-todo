@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Header } from "./components/Header"
 import { Input } from "./components/Input"
 import { PlusCircle } from '@phosphor-icons/react'
@@ -9,32 +10,18 @@ import styles from './app.module.css'
 import "./global.css"
 import { TaskCard } from "./components/TaskCard"
 import { useEffect, useState } from "react"
+import { tasks, addTask, TaskProps } from "./data/task"
 
-const tasks = [
-  {
-    id: "task-1",
-    value: "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
-    isChecked: false
-  },
-  {
-    id: "task-2",
-    value: "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
-    isChecked: true
-  },
-  {
-    id: "task-3",
-    value: "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
-    isChecked: false
-  },
-]
 
 function App() {
+  const [allTasks, setAllTasks] = useState<TaskProps[]>([])
   const [countCompleted, setCountCompleted] = useState(0)
+  const [taskValue, setTaskValue] = useState('')
 
   function handleChangeCheck(id: string) {
-    const taskIndex = tasks.findIndex((item) => item.id === id)
-    tasks[taskIndex].isChecked = !tasks[taskIndex].isChecked
-    if (tasks[taskIndex].isChecked) {
+    const taskIndex = allTasks.findIndex((item) => item.id === id)
+    tasks[taskIndex].isChecked = !allTasks[taskIndex].isChecked
+    if (allTasks[taskIndex].isChecked) {
       setCountCompleted(countCompleted + 1)
     } else {
       setCountCompleted(countCompleted - 1)
@@ -42,12 +29,19 @@ function App() {
   }
 
   useEffect(() => {
+    setAllTasks(tasks)
     countTasksCompletedOnPageLoad()
   }, [])
 
   function countTasksCompletedOnPageLoad() {
-    const completedTasks = tasks.filter((item) => item.isChecked)
+    const completedTasks = allTasks.filter((item) => item.isChecked)
     setCountCompleted(completedTasks.length)
+  }
+
+  async function handleAddTask() {
+    console.log("chamou")
+    const task = addTask(taskValue)
+    setAllTasks([...allTasks, task])
   }
   
   return (
@@ -55,8 +49,15 @@ function App() {
       <Header />
       <main>
         <div className={styles.createTaskContainer}>
-          <Input placeholder="Adicione uma nova tarefa"/>
-          <button className={styles.createTaskBtn}>
+          <Input 
+            placeholder="Adicione uma nova tarefa"
+            value={taskValue}
+            onChange={(e) => setTaskValue(e.target.value)}
+          />
+          <button 
+            className={styles.createTaskBtn}
+            onClick={handleAddTask}
+          >
             Criar
             <PlusCircle size={19} weight="bold"/>
           </button>
