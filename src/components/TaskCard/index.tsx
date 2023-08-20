@@ -29,7 +29,12 @@ export function TaskCard({ value, isChecked, handleCheck, handleRemove }: TaskPr
             <Check size={12} weight='bold'/>
           </Checkbox.Indicator>
         </Checkbox.Root>
-        <label htmlFor="c1">{value}</label>
+        <label 
+          htmlFor="c1"
+          className={checked ? styles.checked : ''}
+        >
+          {value}
+        </label>
       </div>
       <button
         className={styles.removeBtn}

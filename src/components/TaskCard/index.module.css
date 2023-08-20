@@ -36,6 +36,11 @@
   cursor: pointer;
 }
 
+.checked {
+  text-decoration: line-through;
+  color: var(--gray-300);
+}
+
 .checkboxIndicator {
   color: var(--gray-100);
 }
